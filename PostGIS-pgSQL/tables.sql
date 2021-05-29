@@ -2,10 +2,10 @@ CREATE TABLE IF NOT EXISTS users_locations(
     	osm_id serial PRIMARY KEY,
     	latitude DOUBLE PRECISION,
     	longitude DOUBLE PRECISION,
-    	time bigint,	
+    	time bigint,
     	clientId INT,
     	trackingId INT,
-    	geometry GEOMETRY	
+    	geometry GEOMETRY
 );
 CREATE TABLE IF NOT EXISTS users_routes(
 	osm_id serial PRIMARY KEY,
@@ -15,6 +15,6 @@ CREATE TABLE IF NOT EXISTS users_routes(
 	class TEXT,
 	z_order INT,
 	clientId INT,
-    	trackingId INT,
+  trackingId INT,
 	geometry GEOMETRY
 );
