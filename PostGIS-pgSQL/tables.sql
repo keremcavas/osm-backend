@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS users_locations(
     	trackingId INT,
     	geometry GEOMETRY	
 );
-CREATE TABLE IF NOT EXISTS user_routes(
+CREATE TABLE IF NOT EXISTS users_routes(
 	osm_id serial PRIMARY KEY,
 	name TEXT,
 	ref TEXT,
