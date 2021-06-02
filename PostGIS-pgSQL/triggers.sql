@@ -9,7 +9,7 @@ lon NUMERIC;
 BEGIN
 SELECT latitude INTO lat FROM users_locations WHERE osm_id = NEW.osm_id;
 SELECT longitude INTO lon FROM users_locations WHERE osm_id = NEW.osm_id;
-SELECT ST_SetSRID(ST_Point(lon,lat),3857) INTO geo;
+SELECT ST_SetSRID(ST_Point(lon,lat),4326) INTO geo;
 UPDATE users_locations SET geometry = geo WHERE osm_id = NEW.osm_id;
 RETURN NEW;
 END;
