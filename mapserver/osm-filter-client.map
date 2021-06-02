@@ -1,0 +1,90 @@
+# url:	localhost/cgi-bin/mapserv.exe?map=...&clnt={client id list without extra spaces}
+# 	localhost/cgi-bin/mapserv.exe?map=...&clnt=1,50,999
+#
+#	if client id list is empty, do not use 'clnt' parameter in the url with empty values
+#	localhost/cgi-bin/mapserv.exe?map=...&clnt=	(false)
+#	localhost/cgi-bin/mapserv.exe?map=...		(correct)
+
+LAYER
+    GROUP "default"
+    STATUS ON
+    TYPE LINE
+    MINSCALEDENOM 0
+    MAXSCALEDENOM 20800512
+    NAME "mroads1"
+    CONNECTIONTYPE postgis
+    CONNECTION "host=localhost dbname=postgis_30_sample user=postgres password=1234 port=5432"
+    VALIDATION
+        'default_clnt' 'a'
+        'clnt' '^.*$'
+    END
+    DATA "geometry from (select osm_id,geometry,name as name,ref,type, clientid from users_routes where type in ('trunk','motorway') order by z_order asc) as foo using unique osm_id using srid=3857"
+    # FILTER ([clientid] = '%clnt%')
+    LABELITEM "name"
+    CLASSITEM "clientid"
+    CLASS
+        EXPRESSION {%clnt%}
+        TEXT ("[ref]")
+        STYLE
+            WIDTH 1.5
+            COLOR 128 0 128
+        END
+    END
+END
+LAYER
+    GROUP "default"
+    STATUS ON
+    TYPE LINE
+    MINSCALEDENOM 0
+    MAXSCALEDENOM 10400256
+    NAME "mroads2"
+    CONNECTIONTYPE postgis
+    CONNECTION "host=localhost dbname=postgis_30_sample user=postgres password=1234 port=5432"
+    VALIDATION
+        'default_clnt' 'a'
+        'clnt' '^.*$'
+    END
+    DATA "geometry from (select osm_id,geometry,name as name,ref,type, clientid from users_routes where type in ('trunk','motorway') order by z_order asc) as foo using unique osm_id using srid=3857"
+    # FILTER ([clientid] = '%clnt%')
+    LABELITEM "name"
+    CLASSITEM "clientid"
+    CLASS
+        EXPRESSION {%clnt%}
+        TEXT ("[ref]")
+        STYLE
+            WIDTH 1.5
+            COLOR 128 0 128
+        END
+    END
+END
+LAYER
+    GROUP "default"
+    STATUS ON
+    TYPE LINE
+    MINSCALEDENOM 0
+    MAXSCALEDENOM 5200128
+    NAME "mroads3"
+    CONNECTIONTYPE postgis
+    CONNECTION "host=localhost dbname=postgis_30_sample user=postgres password=1234 port=5432"
+    VALIDATION
+        'default_clnt' 'a'
+        'clnt' '^.*$'
+    END
+    DATA "geometry from (select osm_id,geometry,name as name,ref,type, clientid from users_routes where type in ('trunk','motorway') order by z_order asc) as foo using unique osm_id using srid=3857"
+    # FILTER ([clientid] = '%clnt%')
+    LABELITEM "name"
+    CLASSITEM "clientid"
+    CLASS
+        EXPRESSION {%clnt%}
+        TEXT ("[ref]")
+        STYLE
+           WIDTH 1.5
+           OUTLINEWIDTH 1.5
+           OUTLINECOLOR 186 110 39
+        END
+        STYLE
+            WIDTH 1.5
+            COLOR 128 0 128
+        END
+    END
+END

@@ -1,0 +1,97 @@
+LAYER
+    GROUP "default"
+    STATUS ON
+    TYPE LINE
+    MINSCALEDENOM 0
+    MAXSCALEDENOM 20800512
+    NAME "mroads1"
+    CONNECTIONTYPE postgis
+    CONNECTION "host=localhost dbname=postgis_30_sample user=postgres password=1234 port=5432"
+    DATA "geometry from (select osm_id,geometry,name as name,ref,type from users_routes where type in ('trunk','motorway') order by z_order asc) as foo using unique osm_id using srid=3857"
+    LABELITEM "name"
+    CLASSITEM "type"
+    CLASS
+        EXPRESSION "motorway"
+        TEXT ("[ref]")
+        STYLE
+            WIDTH 1.5
+            COLOR 128 0 128
+        END
+    END
+    CLASS
+        EXPRESSION "trunk"
+        TEXT ("[ref]")
+        STYLE
+            WIDTH 1.5
+            COLOR 255 195 69
+        END
+    END
+END
+LAYER
+    GROUP "default"
+    STATUS ON
+    TYPE LINE
+    MINSCALEDENOM 0
+    MAXSCALEDENOM 10400256
+    NAME "mroads2"
+    CONNECTIONTYPE postgis
+    CONNECTION "host=localhost dbname=postgis_30_sample user=postgres password=1234 port=5432"
+    DATA "geometry from (select osm_id,geometry,name as name,ref,type from users_routes where type in ('trunk','motorway') order by z_order asc) as foo using unique osm_id using srid=3857"
+    LABELITEM "name"
+    CLASSITEM "type"
+    CLASS
+        EXPRESSION "motorway"
+        TEXT ("[ref]")
+        STYLE
+            WIDTH 1.5
+            COLOR 128 0 128
+        END
+    END
+    CLASS
+        EXPRESSION "trunk"
+        TEXT ("[ref]")
+        STYLE
+            WIDTH 1.5
+            COLOR 255 195 69
+        END
+    END
+END
+LAYER
+    GROUP "default"
+    STATUS ON
+    TYPE LINE
+    MINSCALEDENOM 0
+    MAXSCALEDENOM 5200128
+    NAME "mroads3"
+    CONNECTIONTYPE postgis
+    CONNECTION "host=localhost dbname=postgis_30_sample user=postgres password=1234 port=5432"
+    DATA "geometry from (select osm_id,geometry,name as name,ref,type from users_routes where type in ('trunk','motorway') order by z_order asc) as foo using unique osm_id using srid=3857"
+    LABELITEM "name"
+    CLASSITEM "type"
+    CLASS
+        EXPRESSION "motorway"
+        TEXT ("[ref]")
+        STYLE
+           WIDTH 1.5
+           OUTLINEWIDTH 1.5
+           OUTLINECOLOR 186 110 39
+        END
+        STYLE
+            WIDTH 1.5
+            COLOR 128 0 128
+        END
+    END
+    CLASS
+        EXPRESSION "trunk"
+        TEXT ("[ref]")
+        STYLE
+           WIDTH 1.5
+           OUTLINEWIDTH 1.5
+           OUTLINECOLOR 221 159 17
+        END
+        STYLE
+            WIDTH 1.5
+            COLOR 255 195 69
+        END
+    END
+END
