@@ -1,7 +1,5 @@
 package osmservice;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import osmservice.model.Tracking;
@@ -35,5 +33,10 @@ public class Controller {
     public void pushRouting(@RequestBody TrackingParam trackingParam) {
         Tracking tracking = new Tracking(trackingParam);
         trackingService.pushRouting(tracking);
+    }
+
+    @PostMapping(value = "/addRoute")
+    public void addRoute(@RequestParam(name = "clientid") int clientId, @RequestParam(name = "trackingid") int trackingId) {
+        trackingService.addRouting(clientId, trackingId);
     }
 }

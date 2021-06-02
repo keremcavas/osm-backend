@@ -8,4 +8,5 @@ public interface ITrackingService {
     List<Tracking> findAll();
     List<Tracking> findByClientId(int clientId);
     void pushRouting(Tracking trackings);
+    void addRouting(int clientId, int trackingId);
 }

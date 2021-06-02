@@ -15,7 +15,6 @@ public class TrackingService implements ITrackingService {
 
     @Override
     public List<Tracking> findAll() {
-
         return (List<Tracking>) trackingRepository.findAll();
     }
 
@@ -29,5 +28,8 @@ public class TrackingService implements ITrackingService {
         trackingRepository.save(tracking);
     }
 
-
+    @Override
+    public void addRouting(int clientId, int trackingId) {
+        trackingRepository.addRoute(clientId, trackingId);
+    }
 }
