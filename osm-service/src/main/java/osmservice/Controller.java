@@ -39,4 +39,9 @@ public class Controller {
     public void addRoute(@RequestParam(name = "clientid") int clientId, @RequestParam(name = "trackingid") int trackingId) {
         trackingService.addRouting(clientId, trackingId);
     }
+
+    @GetMapping(value = "/getRoutesClosePoint")
+    public List<Tracking> getRoutesClosePoint(@RequestParam(name = "latitude") double latitude, @RequestParam("longitude") double longitude) {
+        return trackingService.getRotesNearToPoint(latitude, longitude);
+    }
 }

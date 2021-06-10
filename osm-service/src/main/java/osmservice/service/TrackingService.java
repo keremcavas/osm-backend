@@ -15,7 +15,7 @@ public class TrackingService implements ITrackingService {
 
     @Override
     public List<Tracking> findAll() {
-        return (List<Tracking>) trackingRepository.findAll();
+        return trackingRepository.findAll();
     }
 
     @Override
@@ -31,5 +31,10 @@ public class TrackingService implements ITrackingService {
     @Override
     public void addRouting(int clientId, int trackingId) {
         trackingRepository.addRoute(clientId, trackingId);
+    }
+
+    @Override
+    public List<Tracking> getRotesNearToPoint(double latitude, double langitude) {
+        return trackingRepository.getRoutesNearPoint(latitude, langitude);
     }
 }

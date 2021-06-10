@@ -9,4 +9,5 @@ public interface ITrackingService {
     List<Tracking> findByClientId(int clientId);
     void pushRouting(Tracking trackings);
     void addRouting(int clientId, int trackingId);
+    List<Tracking> getRotesNearToPoint(double latitude, double langitude);
 }
