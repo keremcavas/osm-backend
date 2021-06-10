@@ -15,28 +15,29 @@ $$ LANGUAGE 'plpgsql';
 -- find 5 closest routes to the given location point
 CREATE OR REPLACE FUNCTION get_routes_near_point(lat DOUBLE PRECISION, lon DOUBLE PRECISION)
 RETURNS TABLE (osm_id BIGINT,
-			   clientId INT,
-			   trackingId INT,
-			   time1 BIGINT
+               clientId INT,
+               trackingId INT,
+               time1 BIGINT
 ) AS 
 $$
 DECLARE
-	route RECORD;
+    route RECORD;
 BEGIN
-	FOR route IN (
-		SELECT 
-			r.osm_id,
-			r.trackingId,
-			r.clientId
-		FROM users_routes r
-		ORDER BY ST_Distance(ST_Transform(r.geometry, 4326), ST_SetSRID(ST_MakePoint(lon, lat), 4326))
-		LIMIT 5
-	) LOOP
-		osm_id := route.osm_id;
-		clientId := route.clientID;
-		trackingId := route.trackingID;
-		SELECT l.time INTO time1 FROM users_locations l WHERE route.trackingId = l.trackingId LIMIT 1;
-		RETURN NEXT;
-	END LOOP;
+    FOR route IN (
+        SELECT 
+            r.osm_id,
+            r.trackingId,
+            r.clientId
+        FROM users_routes r
+        ORDER BY ST_Distance(ST_Transform(r.geometry, 4326), ST_SetSRID(ST_MakePoint(lon, lat), 4326))
+        LIMIT 5
+    ) LOOP
+        osm_id := route.osm_id;
+        clientId := route.clientID;
+        trackingId := route.trackingID;
+        SELECT l.time INTO time1 FROM users_locations l WHERE route.trackingId = l.trackingId LIMIT 1;
+        RETURN NEXT;
+    END LOOP;
 END;
 $$ LANGUAGE 'plpgsql';
+
