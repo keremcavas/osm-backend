@@ -10,4 +10,5 @@ public interface ITrackingService {
     void pushRouting(Tracking trackings);
     void addRouting(int clientId, int trackingId);
     List<Tracking> getRotesNearToPoint(double latitude, double langitude);
+    List<Tracking> getRotesNearToPointTimeInterval(double latitude, double langitude, long startTime, long endTime);
 }

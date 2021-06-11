@@ -37,4 +37,9 @@ public class TrackingService implements ITrackingService {
     public List<Tracking> getRotesNearToPoint(double latitude, double langitude) {
         return trackingRepository.getRoutesNearPoint(latitude, langitude);
     }
+
+    @Override
+    public List<Tracking> getRotesNearToPointTimeInterval(double latitude, double langitude, long startTime, long endTime) {
+        return trackingRepository.getRoutesNearPointTimeInterval(latitude, langitude, startTime, endTime);
+    }
 }

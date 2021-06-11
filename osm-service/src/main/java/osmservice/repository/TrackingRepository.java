@@ -19,4 +19,10 @@ public interface TrackingRepository extends JpaRepository<Tracking, Long> {
 
     @Query(value = "SELECT *, 0 AS latitude, 0 AS longitude FROM get_routes_near_point(?1, ?2)", nativeQuery = true)
     List<Tracking> getRoutesNearPoint(@Param("latitude") double latitude, @Param("longitude") double longitude);
+
+    @Query(value = "SELECT *, 0 AS latitude, 0 AS longitude FROM get_routes_near_point_time_inteval(?1, ?2, ?3, ?4)",
+            nativeQuery = true)
+    List<Tracking> getRoutesNearPointTimeInterval(
+            @Param("latitude") double latitude, @Param("longitude") double longitude,
+            @Param("start") long startTime, @Param("end") long endTime);
 }

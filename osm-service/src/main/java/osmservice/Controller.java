@@ -36,12 +36,21 @@ public class Controller {
     }
 
     @PostMapping(value = "/addRoute")
-    public void addRoute(@RequestParam(name = "clientid") int clientId, @RequestParam(name = "trackingid") int trackingId) {
+    public void addRoute(
+            @RequestParam(name = "clientid") int clientId, @RequestParam(name = "trackingid") int trackingId) {
         trackingService.addRouting(clientId, trackingId);
     }
 
     @GetMapping(value = "/getRoutesClosePoint")
-    public List<Tracking> getRoutesClosePoint(@RequestParam(name = "latitude") double latitude, @RequestParam("longitude") double longitude) {
+    public List<Tracking> getRoutesClosePoint(
+            @RequestParam(name = "latitude") double latitude, @RequestParam("longitude") double longitude) {
         return trackingService.getRotesNearToPoint(latitude, longitude);
+    }
+
+    @GetMapping(value = "/getRoutesClosePointTimeInterval")
+    public List<Tracking> getRoutesCloseToPointTimeInterval(
+            @RequestParam(name = "latitude") double latitude, @RequestParam("longitude") double longitude,
+            @RequestParam(name = "start") long startTime, @RequestParam(name = "end") long endTime) {
+        return trackingService.getRotesNearToPointTimeInterval(latitude, longitude, startTime, endTime);
     }
 }
