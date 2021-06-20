@@ -16,5 +16,6 @@ CREATE TABLE IF NOT EXISTS users_routes(
 	z_order INT,
 	clientId INT,
   	trackingId INT,
+	route_color TEXT,
 	geometry GEOMETRY
 );
