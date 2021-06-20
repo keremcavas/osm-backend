@@ -11,7 +11,7 @@ SELECT floor(random() * 256)::text INTO color2;
 SELECT floor(random() * 256)::text INTO color3;
 color := color1 || ' ' || color2 || ' ' || color3;
 ELSE
-SELECT route_color INTO color FROM users_routes WHERE clientid = NEW.clientid LIMIT 1;
+SELECT route_color INTO color FROM users_routes WHERE clientid = NEW.clientid ORDER BY osm_id LIMIT 1;
 END IF;
 UPDATE users_routes SET route_color = color WHERE osm_id = NEW.osm_id;
 RETURN NEW;
