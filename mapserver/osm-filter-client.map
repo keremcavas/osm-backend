@@ -18,7 +18,7 @@ LAYER
         'default_clnt' 'a'
         'clnt' '^.*$'
     END
-    DATA "geometry from (select osm_id,geometry,name as name,ref,type, clientid from users_routes where type in ('trunk','motorway') order by z_order asc) as foo using unique osm_id using srid=3857"
+    DATA "geometry from (select osm_id,geometry,name as name,ref,type,clientid,route_color from users_routes where type in ('trunk','motorway') order by z_order asc) as foo using unique osm_id using srid=3857"
     # FILTER ([clientid] = '%clnt%')
     LABELITEM "name"
     CLASSITEM "clientid"
@@ -26,8 +26,8 @@ LAYER
         EXPRESSION {%clnt%}
         TEXT ("[ref]")
         STYLE
-            WIDTH 1.5
-            COLOR 128 0 128
+            WIDTH 3.0
+            COLOR [route_color]
         END
     END
 END
@@ -44,7 +44,7 @@ LAYER
         'default_clnt' 'a'
         'clnt' '^.*$'
     END
-    DATA "geometry from (select osm_id,geometry,name as name,ref,type, clientid from users_routes where type in ('trunk','motorway') order by z_order asc) as foo using unique osm_id using srid=3857"
+    DATA "geometry from (select osm_id,geometry,name as name,ref,type,clientid,route_color from users_routes where type in ('trunk','motorway') order by z_order asc) as foo using unique osm_id using srid=3857"
     # FILTER ([clientid] = '%clnt%')
     LABELITEM "name"
     CLASSITEM "clientid"
@@ -52,8 +52,8 @@ LAYER
         EXPRESSION {%clnt%}
         TEXT ("[ref]")
         STYLE
-            WIDTH 1.5
-            COLOR 128 0 128
+            WIDTH 3.0
+            COLOR [route_color]
         END
     END
 END
@@ -70,7 +70,7 @@ LAYER
         'default_clnt' 'a'
         'clnt' '^.*$'
     END
-    DATA "geometry from (select osm_id,geometry,name as name,ref,type, clientid from users_routes where type in ('trunk','motorway') order by z_order asc) as foo using unique osm_id using srid=3857"
+    DATA "geometry from (select osm_id,geometry,name as name,ref,type,clientid,route_color from users_routes where type in ('trunk','motorway') order by z_order asc) as foo using unique osm_id using srid=3857"
     # FILTER ([clientid] = '%clnt%')
     LABELITEM "name"
     CLASSITEM "clientid"
@@ -78,13 +78,13 @@ LAYER
         EXPRESSION {%clnt%}
         TEXT ("[ref]")
         STYLE
-           WIDTH 1.5
-           OUTLINEWIDTH 1.5
-           OUTLINECOLOR 186 110 39
+           WIDTH 3.0
+           OUTLINEWIDTH 1.0
+           OUTLINECOLOR [route_color]
         END
         STYLE
-            WIDTH 1.5
-            COLOR 128 0 128
+            WIDTH 3.0
+            COLOR [route_color]
         END
     END
 END
