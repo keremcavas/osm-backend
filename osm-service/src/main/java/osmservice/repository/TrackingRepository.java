@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface TrackingRepository extends JpaRepository<Tracking, Long> {
 
-    @Query(value = "SELECT u FROM Tracking u WHERE u.clientid = ?1")
+    @Query(value = "SELECT DISTINCT ON(trackingid) * FROM users_locations WHERE clientid = ?1" , nativeQuery = true)
     List<Tracking> findByClientId(int clientid);
 
     @Query(value = "SELECT count(*) FROM add_route(?1, ?2)", nativeQuery = true)
