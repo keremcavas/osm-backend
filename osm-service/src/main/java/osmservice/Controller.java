@@ -53,4 +53,20 @@ public class Controller {
             @RequestParam(name = "start") long startTime, @RequestParam(name = "end") long endTime) {
         return trackingService.getRotesNearToPointTimeInterval(latitude, longitude, startTime, endTime);
     }
+
+    @GetMapping(value = "/getRoutesInsideArea")
+    public List<Tracking> getRoutesInsideArea(
+            @RequestParam(name = "latitude1") double latitude1, @RequestParam("longitude1") double longitude1,
+            @RequestParam(name = "latitude2") double latitude2, @RequestParam("longitude2") double longitude2) {
+        return trackingService.getRoutesInsideArea(latitude1, longitude1, latitude2, longitude2);
+    }
+
+    @GetMapping(value = "/getRoutesInsideAreaTimeInterval")
+    public List<Tracking> getRoutesInsideAreaTimeInterval(
+            @RequestParam(name = "latitude1") double latitude1, @RequestParam("longitude1") double longitude1,
+            @RequestParam(name = "latitude2") double latitude2, @RequestParam("longitude2") double longitude2,
+            @RequestParam(name = "start") long startTime, @RequestParam(name = "end") long endTime) {
+        return trackingService.getRoutesInsideAreaTimeInterval(
+                latitude1, longitude1, latitude2, longitude2, startTime, endTime);
+    }
 }

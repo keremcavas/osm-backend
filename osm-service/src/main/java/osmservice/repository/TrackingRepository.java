@@ -24,5 +24,17 @@ public interface TrackingRepository extends JpaRepository<Tracking, Long> {
             nativeQuery = true)
     List<Tracking> getRoutesNearPointTimeInterval(
             @Param("latitude") double latitude, @Param("longitude") double longitude,
-            @Param("start") long startTime, @Param("end") long endTime);
+            @Param("start") long startTime, @Param("end") long endTime
+    );
+
+    List<Tracking> getRoutesInsideArea(
+            @Param("latitude1") double latitude1, @Param("longitude1") double longitude1,
+            @Param("latitude2") double latitude2, @Param("longitude2") double longitude2
+    );
+
+    List<Tracking> getRoutesInsideAreaTimeInterval(
+            @Param("latitude1") double latitude1, @Param("longitude1") double longitude1,
+            @Param("latitude2") double latitude2, @Param("longitude2") double longitude2,
+            @Param("start") long startTime, @Param("end") long endTime
+    );
 }
