@@ -27,11 +27,16 @@ public interface TrackingRepository extends JpaRepository<Tracking, Long> {
             @Param("start") long startTime, @Param("end") long endTime
     );
 
+    @Query(value = "SELECT *, 0 AS latitude, 0 AS longitude FROM get_routes_inside_area(?1, ?2, ?3, ?4)",
+            nativeQuery = true)
     List<Tracking> getRoutesInsideArea(
             @Param("latitude1") double latitude1, @Param("longitude1") double longitude1,
             @Param("latitude2") double latitude2, @Param("longitude2") double longitude2
     );
 
+    @Query(value = "SELECT *, 0 AS latitude, 0 AS longitude " +
+            "FROM get_routes_inside_area_time_interval(?1, ?2, ?3, ?4, ?5, ?6)",
+            nativeQuery = true)
     List<Tracking> getRoutesInsideAreaTimeInterval(
             @Param("latitude1") double latitude1, @Param("longitude1") double longitude1,
             @Param("latitude2") double latitude2, @Param("longitude2") double longitude2,
