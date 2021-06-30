@@ -149,4 +149,25 @@ INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VAL
 SELECT add_route(105, 1009);
 
 
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0281177, 29.0153056, 1625077045518, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0276685, 29.0160620, 1625077068583, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0277859, 29.0166736, 1625077108388, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0278911, 29.0168130, 1625077119105, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0280854, 29.0169632, 1625077128585, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0279154, 29.0175051, 1625077140942, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0274541, 29.0172422, 1625077166820, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0271870, 29.0170491, 1625077178555, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0269644, 29.0169150, 1625077188533, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0267863, 29.0168506, 1625077234364, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0266042, 29.0169150, 1625077245253, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0266325, 29.0174031, 1625077258347, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0267094, 29.0177035, 1625077268032, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0268227, 29.0176231, 1625077279967, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0269482, 29.0175962, 1625077288057, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0275916, 29.0181488, 1625077302975, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0281380, 29.0187442, 1625077314017, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0279437, 29.0193021, 1625077326469, 106, 1010);
+INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0278547, 29.0192538, 1625077334943, 106, 1010);
+SELECT add_route(106,1010);
+
 
