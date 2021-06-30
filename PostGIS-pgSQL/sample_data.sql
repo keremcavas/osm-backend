@@ -148,3 +148,5 @@ INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VAL
 INSERT INTO users_locations(latitude, longitude, time, clientId, trackingId) VALUES(41.0435709, 28.9266747, 1625076300923, 105, 1009);
 SELECT add_route(105, 1009);
 
+
+
