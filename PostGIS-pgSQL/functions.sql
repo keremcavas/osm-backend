@@ -65,3 +65,58 @@ BEGIN
     END LOOP;
 END;
 $$ LANGUAGE 'plpgsql';
+
+
+CREATE OR REPLACE FUNCTION get_routes_inside_area(
+        lat1 DOUBLE PRECISION, lon1 DOUBLE PRECISION,
+        lat2 DOUBLE PRECISION, lon2 DOUBLE PRECISION)
+RETURNS TABLE (
+        clientId INT,
+        trackingId INT,
+        "time" BIGINT
+) AS
+$$
+DECLARE
+    route RECORD;
+BEGIN
+    FOR route IN (
+        SELECT r.trackingId, r.clientId
+        FROM users_routes r
+        WHERE ST_Intersects(ST_Transform(r.geometry, 4326), ST_MakeEnvelope(lon1, lat1, lon2, lat2, 4326))
+    ) LOOP 
+        clientId := route.clientID;
+        trackingId := route.trackingID;
+        SELECT l.time INTO time FROM users_locations l WHERE route.trackingId = l.trackingId LIMIT 1;
+        RETURN NEXT;
+    END LOOP;
+END;
+$$ LANGUAGE 'plpgsql';
+
+
+CREATE OR REPLACE FUNCTION get_routes_inside_area_time_interval(
+        lat1 DOUBLE PRECISION, lon1 DOUBLE PRECISION,
+        lat2 DOUBLE PRECISION, lon2 DOUBLE PRECISION,
+        startTime BIGINT, endTime BIGINT)
+RETURNS TABLE (
+        clientId INT,
+        trackingId INT,
+        "time" BIGINT
+) AS
+$$
+DECLARE
+    route RECORD;
+BEGIN
+    FOR route IN (
+        SELECT r.trackingId, r.clientId
+        FROM users_routes r
+        WHERE ST_Intersects(ST_Transform(r.geometry, 4326), ST_MakeEnvelope(lon1, lat1, lon2, lat2, 4326))
+    ) LOOP 
+        clientId := route.clientID;
+        trackingId := route.trackingID;
+        SELECT l.time INTO time FROM users_locations l WHERE route.trackingId = l.trackingId LIMIT 1;
+        IF time >= startTime AND time <= endTime THEN
+            RETURN NEXT;
+        END IF;
+    END LOOP;
+END;
+$$ LANGUAGE 'plpgsql';
