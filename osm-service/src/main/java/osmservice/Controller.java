@@ -69,4 +69,37 @@ public class Controller {
         return trackingService.getRoutesInsideAreaTimeInterval(
                 latitude1, longitude1, latitude2, longitude2, startTime, endTime);
     }
+
+    @GetMapping(value = "/getRoutesClosePointOfClient")
+    public List<Tracking> getRoutesClosePointOfClient(
+            @RequestParam(name = "latitude") double latitude, @RequestParam("longitude") double longitude,
+            @RequestParam(name = "clnt") int client) {
+        return trackingService.getRotesNearToPointOfClient(latitude, longitude, client);
+    }
+
+    @GetMapping(value = "/getRoutesClosePointTimeIntervalOfClient")
+    public List<Tracking> getRoutesCloseToPointTimeIntervalOfClient(
+            @RequestParam(name = "latitude") double latitude, @RequestParam("longitude") double longitude,
+            @RequestParam(name = "start") long startTime, @RequestParam(name = "end") long endTime,
+            @RequestParam(name = "clnt") int client) {
+        return trackingService.getRotesNearToPointTimeIntervalOfClient(latitude, longitude, startTime, endTime, client);
+    }
+
+    @GetMapping(value = "/getRoutesInsideAreaOfClient")
+    public List<Tracking> getRoutesInsideAreaOfClient(
+            @RequestParam(name = "latitude1") double latitude1, @RequestParam("longitude1") double longitude1,
+            @RequestParam(name = "latitude2") double latitude2, @RequestParam("longitude2") double longitude2,
+            @RequestParam(name = "clnt") int client) {
+        return trackingService.getRoutesInsideAreaOfClient(latitude1, longitude1, latitude2, longitude2, client);
+    }
+
+    @GetMapping(value = "/getRoutesInsideAreaTimeIntervalOfClient")
+    public List<Tracking> getRoutesInsideAreaTimeIntervalOfClient(
+            @RequestParam(name = "latitude1") double latitude1, @RequestParam("longitude1") double longitude1,
+            @RequestParam(name = "latitude2") double latitude2, @RequestParam("longitude2") double longitude2,
+            @RequestParam(name = "start") long startTime, @RequestParam(name = "end") long endTime,
+            @RequestParam(name = "clnt") int client) {
+        return trackingService.getRoutesInsideAreaTimeIntervalOfClient(
+                latitude1, longitude1, latitude2, longitude2, startTime, endTime, client);
+    }
 }

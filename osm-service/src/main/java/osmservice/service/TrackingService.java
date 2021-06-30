@@ -56,4 +56,24 @@ public class TrackingService implements ITrackingService {
         return trackingRepository.getRoutesInsideAreaTimeInterval(
                 latitude1, longitude1, latitude2, longitude2, startTime, endTime);
     }
+
+    @Override
+    public List<Tracking> getRotesNearToPointOfClient(double latitude, double langitude, int client) {
+        return trackingRepository.getRoutesNearPointOfClient(latitude, langitude, client);
+    }
+
+    @Override
+    public List<Tracking> getRotesNearToPointTimeIntervalOfClient(double latitude, double langitude, long startTime, long endTime, int client) {
+        return trackingRepository.getRoutesNearPointTimeIntervalOfClient(latitude, langitude, startTime, endTime, client);
+    }
+
+    @Override
+    public List<Tracking> getRoutesInsideAreaOfClient(double latitude1, double longitude1, double latitude2, double longitude2, int client) {
+        return trackingRepository.getRoutesInsideAreaOfClient(latitude1, longitude1, latitude2, longitude2, client);
+    }
+
+    @Override
+    public List<Tracking> getRoutesInsideAreaTimeIntervalOfClient(double latitude1, double longitude1, double latitude2, double longitude2, long startTime, long endTime, int client) {
+        return trackingRepository.getRoutesInsideAreaTimeIntervalOfClient(latitude1, longitude1, latitude2, longitude2, startTime, endTime, client);
+    }
 }
