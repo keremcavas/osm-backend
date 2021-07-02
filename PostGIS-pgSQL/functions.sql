@@ -240,10 +240,10 @@ RETURNS GEOMETRY AS
 $$
 BEGIN
     RETURN (
-        SELECT * FROM ST_SetSRID(
+        SELECT * FROM ST_Transform(
             (SELECT l.way
             FROM osm_line l
-            ORDER BY St_Distance(ST_Transform(point, 4326), ST_Transform(l.way, 4326))
+            ORDER BY St_Distance(ST_Transform(point, 4326), ST_Transform(l.way, 4326)) ASC
             LIMIT 1)
         , 4326)
     );
@@ -255,6 +255,7 @@ CREATE OR REPLACE FUNCTION match_route(cId INTEGER, tId INTEGER)
 RETURNS VOID AS $$
 DECLARE
     RAW_POINTS GEOMETRY[];
+    raw_points_size INTEGER;
     current_start_point GEOMETRY;
     current_end_point GEOMETRY;
     current_line GEOMETRY;
@@ -266,13 +267,14 @@ DECLARE
     temp_point float8;
 BEGIN
     RAW_POINTS := ARRAY(SELECT l.geometry FROM users_locations l WHERE l.trackingid = tId);
+    raw_points_size := array_upper(RAW_POINTS, 1);
     current_line := get_closest_route(RAW_POINTS[1]);
     current_start_point := ST_ClosestPoint(RAW_POINTS[1], current_line);
-    FOR i IN 2 .. array_upper(RAW_POINTS, 1)
+    FOR i IN 2 .. raw_points_size - 1
     LOOP
         temp_line := get_closest_route(RAW_POINTS[i]);
         IF NOT ST_Equals(current_line, temp_line) THEN
-            current_end_point := ST_Intersection(temp_line, current_line);
+            current_end_point := ST_ClosestPoint(temp_line, current_line);
             start_point := ST_LineLocatePoint(current_line, current_start_point);
             end_point := ST_LineLocatePoint(current_line, current_end_point);
             IF start_point > end_point THEN
@@ -285,6 +287,15 @@ BEGIN
             current_start_point := current_end_point;
         END IF;
     END LOOP;
+    current_end_point := ST_ClosestPoint(RAW_POINTS[raw_points_size], current_line);
+    start_point := ST_LineLocatePoint(current_line, current_start_point);
+    end_point := ST_LineLocatePoint(current_line, current_end_point);
+    IF start_point > end_point THEN
+        temp_point := start_point;
+        start_point := end_point;
+        end_point := temp_point;
+    END IF;
+    FINAL_LINES := array_append(FINAL_LINES, ST_LineSubstring(current_line, start_point, end_point));
     SELECT * INTO line FROM ST_LineMerge(ST_Multi(ST_Collect(FINAL_LINES)));
     INSERT INTO users_routes(name,ref,type,class,z_order,clientId,trackingId,geometry)
     VALUES('Rota', null, 'motorway', 'motorways', 39, cId, tId, line);
